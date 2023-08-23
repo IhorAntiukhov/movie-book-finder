@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCurrentPath } from './store';
+import Route from './components/Route';
+import MoviesPage from './pages/MoviesPage';
+import SeriesPage from './pages/SeriesPage';
 
 function App() {
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={() => {
+        window.history.pushState({}, '', '/series');
+        dispatch(setCurrentPath('/series'));
+      }}>Go to series</button>
+      <Route path="/">
+        <MoviesPage />
+      </Route>
+      <Route path="/series">
+        <SeriesPage />
+      </Route>
     </div>
   );
 }

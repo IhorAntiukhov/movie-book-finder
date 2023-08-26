@@ -1,13 +1,13 @@
-import { useFetchPopularMoviesQuery } from '../store';
+import MoviesList from '../components/MoviesList';
+import PopularMoviesList from '../components/PopularMoviesList';
 
 function MoviesPage() {
-  const { data, error, isLoading } = useFetchPopularMoviesQuery();
-
-  console.log(data);
-
   return (
     <div>
-      Movies
+      <PopularMoviesList />
+      <MoviesList url="/3/movie/top_rated" title="Top rated" />
+      <MoviesList url="/3/movie/upcoming" title="Upcoming" />
+      <MoviesList url="/3/movie/now_playing" title="Now playing" />
     </div>
   );
 }

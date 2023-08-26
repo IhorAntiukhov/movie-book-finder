@@ -18,10 +18,22 @@ const moviesApi = createApi({
             }
           }
         }
+      }),
+      fetchMovies: builder.query({
+        query({ url, page }) {
+          return {
+            url: `${url}?language=en-US&page=${page}`,
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZjRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
+            }
+          }
+        }
       })
     }
   }
 });
 
 export { moviesApi };
-export const { useFetchPopularMoviesQuery } = moviesApi 
+export const { useFetchPopularMoviesQuery, useFetchMoviesQuery } = moviesApi 

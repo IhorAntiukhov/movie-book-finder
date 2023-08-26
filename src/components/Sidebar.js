@@ -28,12 +28,12 @@ function Sidebar() {
       <div>
         <NavigationButton
           onClick={() => { navigateToPage('/') }} title="Movies" path="/">
-          <BiSolidMoviePlay className="image-button__img" />
+          <BiSolidCameraMovie className="image-button__img" />
         </NavigationButton>
 
         <NavigationButton
           onClick={() => { navigateToPage('/series') }} title="Series" path="/series">
-          <BiSolidCameraMovie className="image-button__img" />
+          <BiSolidMoviePlay className="image-button__img" />
         </NavigationButton>
 
         <NavigationButton

@@ -5,10 +5,10 @@ import {
   BiSolidSearchAlt2,
   BiSolidMoviePlay,
   BiSolidCameraMovie,
-  BiSolidBookAlt,
   BiSolidUserCircle
 } from 'react-icons/bi'
 import ImageButton from './ImageButton';
+import SearchMenu from './SearchMenu';
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -34,11 +34,6 @@ function Sidebar() {
         <NavigationButton
           onClick={() => { navigateToPage('/series') }} title="Series" path="/series">
           <BiSolidMoviePlay className="image-button__img" />
-        </NavigationButton>
-
-        <NavigationButton
-          onClick={() => { navigateToPage('/books') }} title="Books" path="/books">
-          <BiSolidBookAlt className="image-button__img" />
         </NavigationButton>
       </div>
 

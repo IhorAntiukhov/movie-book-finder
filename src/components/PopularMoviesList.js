@@ -23,7 +23,7 @@ function PopularMoviesList() {
     <div className="top-movies">
       <h2 className="top-movies__list-title">Trending movies</h2>
 
-      <div className="top-movies__items">
+      <div className={`top-movies__items ${isLoading && 'top-movies__items_loading'}`}>
         {content}
       </div>
     </div>

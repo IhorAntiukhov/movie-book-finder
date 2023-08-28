@@ -6,39 +6,26 @@ import { ImSpinner } from 'react-icons/im';
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi';
 import Dropdown from './Dropdown';
 import { useState } from 'react';
+import useSortList from '../hooks/use-sort-list.js';
 
-function MoviesList({ url, title }) {
-  const [sort, setSort] = useState(0);
+function MoviesList({ url, title, series }) {
   const [page, setPage] = useState(1);
   const { data, error, isLoading } = useFetchMoviesQuery({ url, page });
+  const { sortOrder, setSortOrder, sort } = useSortList();
 
   let content;
   if (isLoading) {
     content = <ReactIcon src={<ImSpinner className="spinner" />} color="#86a69d" />;
   } else if (error) {
-    content = 'An error occurred while trying to get movies.';
+    content = `An error occurred while trying to get ${(series) ? 'series' : 'movies'}.`;
   } else {
     content = data.results.map((movie) => {
       return <MoviesListItem key={movie.id}
-        poster={movie.poster_path} title={movie.title}
-        vote={movie.vote_average} releaseDate={movie.release_date} />;
+        poster={movie.poster_path} title={(series) ? movie.name : movie.title}
+        vote={movie.vote_average} releaseDate={(series) ? movie.first_air_date : movie.release_date} />;
     });
 
-    if (sort === 1) {
-      content.sort((a, b) => {
-        const date1 = new Date(a.props.releaseDate).getTime();
-        const date2 = new Date(b.props.releaseDate).getTime();
-
-        return date2 - date1;
-      });
-    } else if (sort === 2) {
-      content.sort((a, b) => {
-        const date1 = new Date(a.props.releaseDate).getTime();
-        const date2 = new Date(b.props.releaseDate).getTime();
-
-        return date1 - date2;
-      });
-    }
+    content = sort(content);
   }
 
   const dropdownOptions = [
@@ -57,7 +44,7 @@ function MoviesList({ url, title }) {
   ];
 
   const handleClick = () => {
-    setSort((sort === 2) ? 0 : sort + 1);
+    setSortOrder((sortOrder === 2) ? 0 : sortOrder + 1);
   }
 
   return (
@@ -67,10 +54,10 @@ function MoviesList({ url, title }) {
         <div className="movies__sort" onClick={handleClick}>
           <p className="movies__sort-text">Release date</p>
           <div>
-            {(sort === 2 || sort === 0) && <ImageButton>
+            {(sortOrder === 2 || sortOrder === 0) && <ImageButton>
               <ReactIcon src={<BiSolidUpArrow className="image-button__img" />} color="#86a69d" />
             </ImageButton>}
-            {(sort === 1 || sort === 0) && <ImageButton>
+            {(sortOrder === 1 || sortOrder === 0) && <ImageButton>
               <ReactIcon src={<BiSolidDownArrow className="image-button__img" />} color="#86a69d" />
             </ImageButton>}
           </div>
@@ -78,7 +65,7 @@ function MoviesList({ url, title }) {
         <Dropdown options={dropdownOptions} value={page} onChange={(value) => setPage(value)} />
       </div>
 
-      <div className="movies__items">
+      <div className={`movies__items ${isLoading && 'movies__items_loading'}`}>
         {content}
       </div>
     </div>

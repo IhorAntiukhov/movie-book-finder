@@ -8,9 +8,10 @@ function Dropdown({ options, value, onChange }) {
   const dropdownEl = useRef();
 
   useEffect(() => {
-    if (!dropdownEl.current) return;
 
     const handleClick = (event) => {
+      if (dropdownEl.current === null) return;
+
       if (!dropdownEl.current.contains(event.target)) setIsOpen(false);
     }
 

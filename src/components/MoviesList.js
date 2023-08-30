@@ -11,7 +11,7 @@ import useSortList from '../hooks/use-sort-list.js';
 function MoviesList({ url, title, series }) {
   const [page, setPage] = useState(1);
   const { data, error, isLoading } = useFetchMoviesQuery({ url, page });
-  const { sortOrder, setSortOrder, sort } = useSortList();
+  const { sortParams, sortByDate, setSortOrderByDate } = useSortList();
 
   let content;
   if (isLoading) {
@@ -25,39 +25,26 @@ function MoviesList({ url, title, series }) {
         vote={movie.vote_average} releaseDate={(series) ? movie.first_air_date : movie.release_date} />;
     });
 
-    content = sort(content);
+    content = sortByDate(content);
   }
 
   const dropdownOptions = [
-    {
-      label: 'Page 1',
-      value: 1
-    },
-    {
-      label: 'Page 2',
-      value: 2
-    },
-    {
-      label: 'Page 3',
-      value: 3
-    },
+    { label: 'Page 1', value: 1 },
+    { label: 'Page 2', value: 2 },
+    { label: 'Page 3', value: 3 },
   ];
-
-  const handleClick = () => {
-    setSortOrder((sortOrder === 2) ? 0 : sortOrder + 1);
-  }
 
   return (
     <div className="movies">
       <div className="movies__header">
         <h2 className="movies__list-title">{title}</h2>
-        <div className="movies__sort" onClick={handleClick}>
+        <div className="movies__sort" onClick={setSortOrderByDate}>
           <p className="movies__sort-text">Release date</p>
           <div>
-            {(sortOrder === 2 || sortOrder === 0) && <ImageButton>
+            {(sortParams.order === 2 || sortParams.order === 0) && <ImageButton>
               <ReactIcon src={<BiSolidUpArrow className="image-button__img" />} color="#86a69d" />
             </ImageButton>}
-            {(sortOrder === 1 || sortOrder === 0) && <ImageButton>
+            {(sortParams.order === 1 || sortParams.order === 0) && <ImageButton>
               <ReactIcon src={<BiSolidDownArrow className="image-button__img" />} color="#86a69d" />
             </ImageButton>}
           </div>

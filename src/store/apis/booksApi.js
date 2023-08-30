@@ -7,11 +7,16 @@ const booksApi = createApi({
   }),
   endpoints(builder) {
     return {
-      fetchJavaScriptBooks: builder.query({
-        query() {
+      fetchBooksBySearchTerm: builder.query({
+        query(searchTerm) {
           return {
-            url: '/v1/volumes?q=JavaScript&key=AIzaSyC1k97c4_4Le_APQIoqUyOPusVTtKewk50&langRestrict=en',
-            method: 'GET'
+            url: '/v1/volumes',
+            method: 'GET',
+            params: {
+              q: searchTerm,
+              key: 'AIzaSyC1k97c4_4Le_APQIoqUyOPusVTtKewk50',
+              langRestrict: 'en'
+            }
           }
         }
       }),
@@ -20,4 +25,4 @@ const booksApi = createApi({
 });
 
 export { booksApi };
-export const { useFetchJavaScriptBooksQuery } = booksApi; 
+export const { useFetchBooksBySearchTermQuery } = booksApi; 

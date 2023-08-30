@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { setCurrentPath } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPath, setIsSearchMenuOpen } from '../store';
 import NavigationButton from './NavigationButton';
 import {
   BiSolidSearchAlt2,
@@ -13,6 +13,8 @@ import SearchMenu from './SearchMenu';
 function Sidebar() {
   const dispatch = useDispatch();
 
+  const isSearchMenuOpen = useSelector((state) => state.mainReducer.isSearchMenuOpen);
+
   const navigateToPage = (path) => {
     window.history.pushState({}, '', path);
     dispatch(setCurrentPath(path));
@@ -20,8 +22,14 @@ function Sidebar() {
 
   return (
     <div className="sidebar">
+      <SearchMenu className={
+        `${(isSearchMenuOpen === 1) ? 'search_close' :
+          (isSearchMenuOpen === 2) ? 'search_open' : ''}`} />
+
       <ImageButton
-        onClick={() => { }} title="Search">
+        onClick={() => {
+          dispatch(setIsSearchMenuOpen((isSearchMenuOpen === 0 || isSearchMenuOpen === 1) ? 2 : 1))
+        }} title="Search">
         <BiSolidSearchAlt2 className="image-button__img" />
       </ImageButton>
 

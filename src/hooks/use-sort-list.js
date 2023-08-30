@@ -1,19 +1,20 @@
 import { useState } from 'react';
 
 function useSortList() {
-  const [sortOrder, setSortOrder] = useState(0);
+  const [sortParams, setSortParams] = useState({ criteria: 'date', order: 0 });
 
-  const sort = (content) => {
+  const sortByDate = (content) => {
     const sortedContent = [...content];
 
-    if (sortOrder === 1) {
+    if (sortParams.order === 1) {
       sortedContent.sort((a, b) => {
+        console.log(a, b);
         const date1 = new Date(a.props.releaseDate).getTime();
         const date2 = new Date(b.props.releaseDate).getTime();
 
         return date2 - date1;
       });
-    } else if (sortOrder === 2) {
+    } else if (sortParams.order === 2) {
       sortedContent.sort((a, b) => {
         const date1 = new Date(a.props.releaseDate).getTime();
         const date2 = new Date(b.props.releaseDate).getTime();
@@ -25,7 +26,49 @@ function useSortList() {
     return sortedContent;
   }
 
-  return { sortOrder, setSortOrder, sort };
+  const sortByRating = (content) => {
+    const sortedContent = [...content];
+
+    if (sortParams.order === 1) {
+      sortedContent.sort((a, b) => {
+        return b.props.vote - a.props.vote;
+      });
+    } else if (sortParams.order === 2) {
+      sortedContent.sort((a, b) => {
+        return a.props.vote - b.props.vote;
+      });
+    }
+
+    return sortedContent;
+  }
+
+  const setSortOrderByRating = () => {
+    if (sortParams.criteria !== 'rating') {
+      setSortParams({ criteria: 'rating', order: 1 });
+    } else {
+      setSortParams((sortParams.order === 2) ?
+        { ...sortParams, order: 0 } :
+        { ...sortParams, order: sortParams.order + 1 });
+    }
+  }
+
+  const setSortOrderByDate = () => {
+    if (sortParams.criteria !== 'date') {
+      setSortParams({ criteria: 'date', order: 1 });
+    } else {
+      setSortParams((sortParams.order === 2) ?
+        { ...sortParams, order: 0 } :
+        { ...sortParams, order: sortParams.order + 1 });
+    }
+  }
+
+  return {
+    sortParams,
+    sortByDate,
+    sortByRating,
+    setSortOrderByRating,
+    setSortOrderByDate
+  };
 }
 
 export default useSortList;

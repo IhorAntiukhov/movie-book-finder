@@ -3,14 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 const mainSlice = createSlice({
   name: 'main',
   initialState: {
-    currentPath: '/'
+    currentPath: '/',
+    searchSection: 'movies',
+    isSearchMenuOpen: 0
   },
   reducers: {
     setCurrentPath(state, action) {
-      return { ...state, currentPath: action.payload };
+      state.currentPath = action.payload;
+    },
+    setSearchSection(state, action) {
+      state.searchSection = action.payload;
+    },
+    setIsSearchMenuOpen(state, action) {
+      state.isSearchMenuOpen = action.payload;
     }
   }
 });
 
 export const mainReducer = mainSlice.reducer;
-export const { setCurrentPath } = mainSlice.actions;
+export const { setCurrentPath, setSearchSection, setIsSearchMenuOpen } = mainSlice.actions;

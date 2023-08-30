@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import { mainReducer, setCurrentPath } from './slices/mainSlice';
+import { mainReducer, setCurrentPath, setSearchSection, setIsSearchMenuOpen } from './slices/mainSlice';
 import { moviesApi } from './apis/moviesApi';
 import { seriesApi } from './apis/seriesApi';
 import { booksApi } from './apis/booksApi';
@@ -22,7 +22,11 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { store, setCurrentPath };
-export { useFetchPopularMoviesQuery, useFetchMoviesQuery } from './apis/moviesApi';
-export { useFetchPopularSeriesQuery } from './apis/seriesApi';
-export { useFetchJavaScriptBooksQuery } from './apis/booksApi';
+export { store, setCurrentPath, setSearchSection, setIsSearchMenuOpen };
+export {
+  useFetchPopularMoviesQuery,
+  useFetchMoviesQuery,
+  useFetchMoviesBySearchTermQuery
+} from './apis/moviesApi';
+export { useFetchPopularSeriesQuery, useFetchSeriesBySearchTermQuery } from './apis/seriesApi';
+export { useFetchBooksBySearchTermQuery } from './apis/booksApi';

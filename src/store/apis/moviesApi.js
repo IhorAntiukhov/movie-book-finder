@@ -10,8 +10,12 @@ const moviesApi = createApi({
       fetchPopularMovies: builder.query({
         query() {
           return {
-            url: '/3/movie/popular?language=en-US&page=1',
+            url: '/3/movie/popular',
             method: 'GET',
+            params: {
+              language: 'en-US',
+              page: '1'
+            },
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZjRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
@@ -22,8 +26,29 @@ const moviesApi = createApi({
       fetchMovies: builder.query({
         query({ url, page }) {
           return {
-            url: `${url}?language=en-US&page=${page}`,
+            url,
             method: 'GET',
+            params: {
+              language: 'en-US',
+              page
+            },
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZjRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
+            }
+          }
+        }
+      }),
+      fetchMoviesBySearchTerm: builder.query({
+        query({ searchTerm, page }) {
+          return {
+            url: `/3/search/movie`,
+            method: 'GET',
+            params: {
+              query: searchTerm,
+              language: 'en-US',
+              page
+            },
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZjRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
@@ -36,4 +61,4 @@ const moviesApi = createApi({
 });
 
 export { moviesApi };
-export const { useFetchPopularMoviesQuery, useFetchMoviesQuery } = moviesApi 
+export const { useFetchPopularMoviesQuery, useFetchMoviesQuery, useFetchMoviesBySearchTermQuery } = moviesApi 

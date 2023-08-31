@@ -20,9 +20,21 @@ const booksApi = createApi({
           }
         }
       }),
+      fetchBookById: builder.query({
+        query(id) {
+          return {
+            url: `/v1/volumes/${id}`,
+            method: 'GET',
+            params: {
+              key: 'AIzaSyC1k97c4_4Le_APQIoqUyOPusVTtKewk50',
+              langRestrict: 'en'
+            }
+          }
+        }
+      })
     }
   }
 });
 
 export { booksApi };
-export const { useFetchBooksBySearchTermQuery } = booksApi; 
+export const { useFetchBooksBySearchTermQuery, useFetchBookByIdQuery } = booksApi; 

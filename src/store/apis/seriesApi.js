@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const headers = {
+  accept: 'application/json',
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZ' +
+    'jRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ' +
+    '2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
+};
+
 const seriesApi = createApi({
   reducerPath: 'series',
   baseQuery: fetchBaseQuery({
@@ -15,33 +22,56 @@ const seriesApi = createApi({
             params: {
               language: 'en-US'
             },
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZjRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
-            }
+            headers
           }
         }
       }),
       fetchSeriesBySearchTerm: builder.query({
         query({ searchTerm, page }) {
           return {
-            url: `/3/search/tv`,
+            url: '/3/search/tv',
             method: 'GET',
             params: {
               query: searchTerm.replace(' ', '%20'),
               language: 'en-US',
               page
             },
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGUzZDUxOGJiZTU1MGI0MjIwNGQ1OGZhZjRhM2JiNiIsInN1YiI6IjY0ZTZmZmY1ZTg5NGE2MDEwMTIwNjQyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_3BoaZ8tH59sxOFKuFanWCdbg-ocHcxKZPujfwHX-U'
-            }
+            headers
           }
         }
-      })
+      }),
+      fetchSerieDetails: builder.query({
+        query(id) {
+          return {
+            url: `/3/tv/${id}`,
+            method: 'GET',
+            params: {
+              language: 'en-US',
+            },
+            headers
+          }
+        }
+      }),
+      fetchSerieCast: builder.query({
+        query(id) {
+          return {
+            url: `/3/tv/${id}/credits`,
+            method: 'GET',
+            params: {
+              language: 'en-US',
+            },
+            headers
+          }
+        }
+      }),
     }
   }
 });
 
 export { seriesApi };
-export const { useFetchPopularSeriesQuery, useFetchSeriesBySearchTermQuery } = seriesApi; 
+export const {
+  useFetchPopularSeriesQuery,
+  useFetchSeriesBySearchTermQuery,
+  useFetchSerieDetailsQuery,
+  useFetchSerieCastQuery
+} = seriesApi; 

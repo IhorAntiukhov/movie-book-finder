@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import ReactIcon from './ReactIcon';
 
 function SearchMenuButton({ children, onClick, title, section }) {
-  const searchSection = useSelector((state) => state.mainReducer.searchSection);
+  const searchSection = useSelector((state) => state.navigationReducer.searchSection);
 
   return (
     <button

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import ReactIcon from './ReactIcon';
 
 function NavigationButton({ children, onClick, title, path }) {
-  const currentPath = useSelector((state) => state.mainReducer.currentPath);
+  const currentPath = useSelector((state) => state.navigationReducer.currentPath);
 
   return (
     <button

@@ -7,6 +7,7 @@ import BooksListItem from './BooksListItem';
 
 function BooksSearchResults({ searchTerm }) {
   const { data, error, isLoading } = useFetchBooksBySearchTermQuery(searchTerm);
+
   console.log(data);
 
   let content;
@@ -16,8 +17,8 @@ function BooksSearchResults({ searchTerm }) {
     content = `An error occurred while trying to get books.`;
   } else {
     content = data.items?.map((book) => {
-      return <BooksListItem key={book.id}
-        cover={book.volumeInfo.imageLinks.thumbnail} authors={book.volumeInfo.authors?.join(', ')}
+      return <BooksListItem key={book.id} id={book.id}
+        cover={book.volumeInfo.imageLinks?.thumbnail} authors={book.volumeInfo.authors?.join(', ')}
         title={book.volumeInfo.title} subtitle={book.volumeInfo.subtitle}
         description={book.volumeInfo.description} vote={book.volumeInfo.averageRating || 0}
         releaseDate={book.volumeInfo.publishedDate} />;
@@ -49,7 +50,7 @@ function BooksSearchResults({ searchTerm }) {
 
       {content}
       {(!isLoading && !error && data.totalItems === 0) &&
-        <p className="search-list__no-results">There are no results for your search.</p>}
+        <p className="no-results">There are no results for your search.</p>}
     </div>
   );
 }

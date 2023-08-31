@@ -1,13 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import { mainReducer, setCurrentPath, setSearchSection, setIsSearchMenuOpen } from './slices/mainSlice';
+import {
+  navigationReducer, setCurrentPath, setSearchSection, setIsSearchMenuOpen, setOpenedMovieBookId
+} from './slices/navigationSlice';
+import {
+  movieBookIdReducer, setOpenedMovieId, setOpenedSerieId, setOpenedBookId
+} from './slices/movieBookIdSlice';
 import { moviesApi } from './apis/moviesApi';
 import { seriesApi } from './apis/seriesApi';
 import { booksApi } from './apis/booksApi';
 
 const store = configureStore({
   reducer: {
-    mainReducer,
+    navigationReducer,
+    movieBookIdReducer,
     [moviesApi.reducerPath]: moviesApi.reducer,
     [seriesApi.reducerPath]: seriesApi.reducer,
     [booksApi.reducerPath]: booksApi.reducer
@@ -22,11 +28,23 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { store, setCurrentPath, setSearchSection, setIsSearchMenuOpen };
+export {
+  store, setCurrentPath, setSearchSection, setIsSearchMenuOpen,
+  setOpenedMovieBookId, setOpenedMovieId, setOpenedSerieId, setOpenedBookId
+};
 export {
   useFetchPopularMoviesQuery,
   useFetchMoviesQuery,
-  useFetchMoviesBySearchTermQuery
+  useFetchMoviesBySearchTermQuery,
+  useFetchMovieDetailsQuery,
+  useFetchMovieCastQuery
 } from './apis/moviesApi';
-export { useFetchPopularSeriesQuery, useFetchSeriesBySearchTermQuery } from './apis/seriesApi';
-export { useFetchBooksBySearchTermQuery } from './apis/booksApi';
+export {
+  useFetchPopularSeriesQuery,
+  useFetchSeriesBySearchTermQuery,
+  useFetchSerieCastQuery
+} from './apis/seriesApi';
+export {
+  useFetchBooksBySearchTermQuery,
+  useFetchBookByIdQuery
+} from './apis/booksApi';

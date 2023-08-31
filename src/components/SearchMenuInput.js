@@ -8,7 +8,7 @@ import BooksSearchResults from './BooksSearchResults';
 function SearhMenuInput() {
   const [inputText, setInputText] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const searchSection = useSelector((state) => state.mainReducer.searchSection);
+  const searchSection = useSelector((state) => state.navigationReducer.searchSection);
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPath } from './store'
 import Sidebar from './components/Sidebar';
@@ -6,15 +6,16 @@ import Route from './components/Route';
 import MoviesPage from './pages/MoviesPage';
 import SeriesPage from './pages/SeriesPage';
 import UserProfilePage from './pages/UserProfilePage';
-import MovieDetailsPage from './pages/MovieDetailsPage';
+import DetailsPage from './pages/DetailsPage';
 
 function App() {
   const dispatch = useDispatch();
 
-  const { currentPath, isSearchMenuOpen } = useSelector((state) => (
+  const { currentPath, isSearchMenuOpen, openedMovieBookId } = useSelector((state) => (
     {
-      currentPath: state.mainReducer.currentPath,
-      isSearchMenuOpen: state.mainReducer.isSearchMenuOpen
+      currentPath: state.navigationReducer.currentPath,
+      isSearchMenuOpen: state.navigationReducer.isSearchMenuOpen,
+      openedMovieBookId: state.navigationReducer.openedMovieBookId
     }
   ));
 
@@ -22,7 +23,7 @@ function App() {
     if (window.location.pathname !== currentPath) {
       dispatch(setCurrentPath(window.location.pathname));
     }
-  }, []);
+  }, [dispatch, currentPath]);
 
   useEffect(() => {
     const handler = () => {
@@ -34,6 +35,11 @@ function App() {
       window.removeEventListener('popstate', handler);
     }
   }, [dispatch]);
+
+  if (currentPath === '/details' && !openedMovieBookId) {
+    window.history.pushState({}, '', '/');
+    dispatch(setCurrentPath('/'));
+  }
 
   return (
     <div className="content">
@@ -51,8 +57,8 @@ function App() {
         <Route path="/userProfile">
           <UserProfilePage />
         </Route>
-        <Route path="/movieDetails">
-          <MovieDetailsPage />
+        <Route path="/details">
+          <DetailsPage />
         </Route>
       </div>
     </div>

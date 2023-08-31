@@ -13,7 +13,7 @@ import SearchMenu from './SearchMenu';
 function Sidebar() {
   const dispatch = useDispatch();
 
-  const isSearchMenuOpen = useSelector((state) => state.mainReducer.isSearchMenuOpen);
+  const isSearchMenuOpen = useSelector((state) => state.navigationReducer.isSearchMenuOpen);
 
   const navigateToPage = (path) => {
     window.history.pushState({}, '', path);

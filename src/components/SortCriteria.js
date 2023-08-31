@@ -3,8 +3,6 @@ import ReactIcon from './ReactIcon';
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi';
 
 function SortCriteria({ sortParams, onSort, title, criteria }) {
-  console.log(sortParams);
-
   return (
     <div className="search-list__sort-criteria" onClick={onSort}>
       <p className="movies__sort-text">{title}</p>

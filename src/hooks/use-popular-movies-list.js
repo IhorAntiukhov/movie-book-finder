@@ -10,7 +10,7 @@ function usePopularMoviesList(data, error, isLoading, isSeries) {
     content = `An error occurred while trying to get ${(isSeries) ? 'series' : 'movies'}.`;
   } else {
     content = data.results.map((movie) => {
-      return <PopularMoviesListItem key={movie.id}
+      return <PopularMoviesListItem key={movie.id} id={movie.id} type={(isSeries) ? 'serie' : 'movie'}
         poster={movie.poster_path} title={(isSeries) ? movie.name : movie.title}
         description={movie.overview} vote={Number((movie.vote_average).toFixed(1))}
         releaseDate={(isSeries) ? movie.first_air_date : movie.release_date} />;

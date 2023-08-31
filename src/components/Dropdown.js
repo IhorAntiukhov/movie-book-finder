@@ -3,7 +3,7 @@ import ReactIcon from './ReactIcon';
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi';
 
 function Dropdown({ options, value, onChange }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(0);
 
   const dropdownEl = useRef();
 
@@ -12,7 +12,7 @@ function Dropdown({ options, value, onChange }) {
     const handleClick = (event) => {
       if (dropdownEl.current === null) return;
 
-      if (!dropdownEl.current.contains(event.target)) setIsOpen(false);
+      if (!dropdownEl.current.contains(event.target)) setIsOpen(1);
     }
 
     document.addEventListener('click', handleClick, true);
@@ -27,7 +27,7 @@ function Dropdown({ options, value, onChange }) {
       key={option.value}
       className="dropdown__option"
       onClick={() => {
-        setIsOpen(false);
+        setIsOpen(1);
         onChange(option.value);
       }}>{option.label}</div>;
   });
@@ -37,11 +37,12 @@ function Dropdown({ options, value, onChange }) {
 
   return (
     <div className="dropdown" ref={dropdownEl}>
-      <div className="dropdown__current" onClick={() => setIsOpen(!isOpen)}>
+      <div className="dropdown__current" onClick={() => setIsOpen(2)}>
         <p className="dropdown__text">{`Page ${value}`}</p>
         <ReactIcon src={dropdownIcon} color="#86a69d" />
       </div>
-      <div className={`dropdown__menu ${(isOpen) ? 'dropdown__menu_open' : 'dropdown__menu_close'}`}>
+      <div className={`dropdown__menu 
+      ${(isOpen === 2) ? 'dropdown__menu_open' : (isOpen === 1) ? 'dropdown__menu_close' : ''}`}>
         {renderedOptions}
       </div>
     </div>

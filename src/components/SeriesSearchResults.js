@@ -43,7 +43,7 @@ function SeriesSearchResults({ searchTerm }) {
 
       {content}
       {(!isLoading && !error && content.length === 0) &&
-        <p className="search-list__no-results">There are no results for your search.</p>}
+        <p className="no-results">There are no results for your search.</p>}
     </div>
   );
 }

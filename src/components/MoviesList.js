@@ -20,7 +20,7 @@ function MoviesList({ url, title, series }) {
     content = `An error occurred while trying to get ${(series) ? 'series' : 'movies'}.`;
   } else {
     content = data.results.map((movie) => {
-      return <MoviesListItem key={movie.id}
+      return <MoviesListItem key={movie.id} id={movie.id} type={((series) ? 'serie' : 'movie')}
         poster={movie.poster_path} title={(series) ? movie.name : movie.title}
         vote={movie.vote_average} releaseDate={(series) ? movie.first_air_date : movie.release_date} />;
     });

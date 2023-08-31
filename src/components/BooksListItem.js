@@ -1,11 +1,13 @@
+import useNavigateToMoviePage from '../hooks/use-navigate-to-movie-page';
 import ReactIcon from './ReactIcon';
 import { BiSolidStar } from 'react-icons/bi';
 
-function BooksListItem({ cover, authors, title, subtitle, description, vote, releaseDate }) {
+function BooksListItem({ id, cover, authors, title, subtitle, description, vote, releaseDate }) {
   return (
     <div className="book">
       <div className="book__img-authors">
-        <img className="book__img" src={cover} alt={title} />
+        <img className="book__img" src={cover} alt={title}
+          onClick={useNavigateToMoviePage('book', id)} />
         <p className="book__authors">{authors}</p>
       </div>
       <div className="book__text">

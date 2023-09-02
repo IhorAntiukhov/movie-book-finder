@@ -4,33 +4,38 @@ import {
   navigationReducer, setCurrentPath, setSearchSection, setIsSearchMenuOpen, setOpenedMovieBookId
 } from './slices/navigationSlice';
 import {
-  movieBookIdReducer, setOpenedMovieId, setOpenedSerieId, setOpenedBookId
-} from './slices/movieBookIdSlice';
+  userProfileReducer, setFullName, addMovieToWatchList, addSerieToWatchList,
+  addBookToReadingList, removeMovieFromWatchList, removeSerieFromWatchList, removeBookFromReadingList
+} from './slices/userProfileSlice';
 import { moviesApi } from './apis/moviesApi';
 import { seriesApi } from './apis/seriesApi';
 import { booksApi } from './apis/booksApi';
+import { userApi } from './apis/userApi';
 
 const store = configureStore({
   reducer: {
     navigationReducer,
-    movieBookIdReducer,
+    userProfileReducer,
     [moviesApi.reducerPath]: moviesApi.reducer,
     [seriesApi.reducerPath]: seriesApi.reducer,
-    [booksApi.reducerPath]: booksApi.reducer
+    [booksApi.reducerPath]: booksApi.reducer,
+    [userApi.reducerPath]: userApi.reducer
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware()
       .concat(moviesApi.middleware)
       .concat(seriesApi.middleware)
       .concat(booksApi.middleware)
+      .concat(userApi.middleware)
   }
 });
 
 setupListeners(store.dispatch);
 
 export {
-  store, setCurrentPath, setSearchSection, setIsSearchMenuOpen,
-  setOpenedMovieBookId, setOpenedMovieId, setOpenedSerieId, setOpenedBookId
+  store, setCurrentPath, setSearchSection, setIsSearchMenuOpen, setOpenedMovieBookId,
+  setFullName, addMovieToWatchList, addSerieToWatchList, addBookToReadingList,
+  removeMovieFromWatchList, removeSerieFromWatchList, removeBookFromReadingList
 };
 export {
   useFetchPopularMoviesQuery,
@@ -48,3 +53,10 @@ export {
   useFetchBooksBySearchTermQuery,
   useFetchBookByIdQuery
 } from './apis/booksApi';
+export {
+  useFetchUserNameQuery,
+  useSetUserNameMutation,
+  useFetchUserListQuery,
+  useAddItemToUserListMutation,
+  useRemoveItemFromUserListMutation
+} from './apis/userApi';

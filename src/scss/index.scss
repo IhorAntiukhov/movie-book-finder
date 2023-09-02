@@ -558,6 +558,7 @@ body {
 .movies__item {
   display: flex;
   flex-direction: column;
+  width: 200px;
   margin: 0 20px 10px 0;
 }
 
@@ -583,6 +584,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+.movies-date-vote_margin {
+  margin-bottom: 15px;
 }
 
 .movies__date {
@@ -618,12 +622,12 @@ body {
 
 .movie-info__title {
   @include font(24, 700);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .movie-info__subtitle {
   @include font(18, 700);
-  margin-bottom: 20px;
+  margin: -10px 0 20px 0;
 }
 
 .movie-info__table {
@@ -823,7 +827,7 @@ a {
 
 .button {
   @include font(18, 700);
-  padding: 10px 20px;
+  padding: 8px 18px;
   background-color: $primaryColor;
   color: white;
   border-radius: 5px;
@@ -838,4 +842,61 @@ a {
   @include font();
   text-align: center;
   color: $darkGrayColor;
+}
+
+.user-info {
+  display: flex;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: $darkNeutralColor2 2px solid;
+}
+
+.user-info__img {
+  width: 240px;
+  height: 240px;
+  margin-right: 20px;
+  border-radius: 12px;
+  box-shadow: 1px 1px 5px gray;
+}
+
+.user-info__title {
+  @include font(24, 700);
+  margin-bottom: 20px;
+}
+
+.user-info__name {
+  position: relative;
+
+  .input {
+    min-width: 300px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: $darkNeutralColor2;
+  }
+
+  .button {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.user-list {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: $darkNeutralColor2 2px solid;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.user-list__title {
+  @include font(24, 700);
+  padding-left: 7px;
+  margin-bottom: 20px;
+  border-left: $primaryColor 3px solid;
+}
+
+.user-list__items {
+  @extend .movies__items;
 }

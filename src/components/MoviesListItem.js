@@ -1,20 +1,27 @@
 import { BiSolidStar } from 'react-icons/bi';
 import ReactIcon from './ReactIcon';
 import useNavigateToMoviePage from '../hooks/use-navigate-to-movie-page';
+import { useRemoveItemFromUserListMutation } from '../store';
 
-function MoviesListItem({ id, type, poster, title, vote, releaseDate }) {
+function MoviesListItem({ id, type, poster, title, vote, releaseDate, removeButton, dbId }) {
+  const [removeItemFromList] = useRemoveItemFromUserListMutation();
+
   return (
-    <div className="movies__item" onClick={useNavigateToMoviePage(type, id)}>
-      <img className="movies__img" src={`https://image.tmdb.org/t/p/w500/${poster}`} alt={title} />
+    <div className="movies__item">
+      <img className="movies__img" onClick={useNavigateToMoviePage(type, id)}
+        src={(type !== 'book') ? `https://image.tmdb.org/t/p/w500/${poster}` : poster} alt={title} />
       <p className="movies__title">{title}</p>
-      <div className="movies__date-vote">
+      <div className={`movies__date-vote ${(removeButton) ? 'movies-date-vote_margin' : ''}`}>
         <div className="vote">
           <ReactIcon src={<BiSolidStar className="vote__img" />} color="#d4d420" />
           <p className="vote__text">{vote}</p>
         </div>
         <p className="movies__date">{releaseDate}</p>
       </div>
-    </div>
+      <button className="button" onClick={() => { removeItemFromList({ url: `/${type}sList`, id: dbId }) }}>
+        Remove {type}
+      </button>
+    </div >
   )
 }
 

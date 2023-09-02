@@ -2,25 +2,36 @@ import { useSelector } from 'react-redux';
 import { useFetchBookByIdQuery } from '../store';
 import ReactIcon from './ReactIcon';
 import { ImSpinner } from 'react-icons/im';
+import { useAddItemToUserListMutation } from '../store';
 
 function BookInfo() {
   const id = useSelector((state) => state.navigationReducer.openedMovieBookId.id);
   const { data, error, isLoading } = useFetchBookByIdQuery(id);
-
-  console.log(data);
+  const [addBookToWatchlist] = useAddItemToUserListMutation();
 
   let content;
   if (isLoading) {
     content = <ReactIcon src={<ImSpinner className="spinner" />} color="#86a69d" />
   } else if (error) {
-    content = 'An error occurred while trying to get book details.';
+    content = <p className="no-results">An error occurred while trying to get book details.</p>;
   } else {
+    const item = {
+      movieId: data.id,
+      type: 'book',
+      poster: data.volumeInfo.imageLinks.extraLarge,
+      title: data.volumeInfo.title,
+      vote: data.volumeInfo.averageRating,
+      releaseDate: data.volumeInfo.publishedDate
+    }
+
     content = (
       <>
         <div className="movie-info__img-button">
           <img className="movie-info__img"
             src={data.volumeInfo.imageLinks.extraLarge} alt={data.volumeInfo.title} />
-          <button className="button">+ Add to reading list</button>
+          <button className="button" onClick={() => addBookToWatchlist({ url: '/booksList', item })}>
+            + Add to reading list
+          </button>
         </div>
         <div className="movie-info__text">
           <h1 className="movie-info__title">{data.volumeInfo.title}</h1>

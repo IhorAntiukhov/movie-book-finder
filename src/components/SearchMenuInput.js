@@ -27,7 +27,7 @@ function SearhMenuInput() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Input value={inputText} onChange={handleInput} label={`${sectionNameInSingular} name`} />
+        <Input value={inputText} onChange={handleInput} label={`${sectionNameInSingular} name`} search />
       </form>
 
       {searchTerm && searchSection === 'movies' && <MoviesSearchResults searchTerm={searchTerm} />}

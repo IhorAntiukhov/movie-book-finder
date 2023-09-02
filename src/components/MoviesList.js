@@ -17,7 +17,9 @@ function MoviesList({ url, title, series }) {
   if (isLoading) {
     content = <ReactIcon src={<ImSpinner className="spinner" />} color="#86a69d" />;
   } else if (error) {
-    content = `An error occurred while trying to get ${(series) ? 'series' : 'movies'}.`;
+    content = <p className="no-results">
+      An error occurred while trying to get ${(series) ? 'series' : 'movies'}.
+    </p>;
   } else {
     content = data.results.map((movie) => {
       return <MoviesListItem key={movie.id} id={movie.id} type={((series) ? 'serie' : 'movie')}

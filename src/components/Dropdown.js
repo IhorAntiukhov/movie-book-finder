@@ -32,12 +32,12 @@ function Dropdown({ options, value, onChange }) {
       }}>{option.label}</div>;
   });
 
-  const dropdownIcon = (isOpen) ? <BiSolidUpArrow className="dropdown__img" />
+  const dropdownIcon = (isOpen === 2) ? <BiSolidUpArrow className="dropdown__img" />
     : <BiSolidDownArrow className="dropdown__img" />;
 
   return (
     <div className="dropdown" ref={dropdownEl}>
-      <div className="dropdown__current" onClick={() => setIsOpen(2)}>
+      <div className="dropdown__current" onClick={() => setIsOpen((isOpen === 1 || isOpen === 0) ? 2 : 1)}>
         <p className="dropdown__text">{`Page ${value}`}</p>
         <ReactIcon src={dropdownIcon} color="#86a69d" />
       </div>

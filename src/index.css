@@ -613,11 +613,11 @@ body {
   white-space: nowrap;
 }
 
-.movies__items {
+.movies__items, .user-list__items {
   display: flex;
   overflow-x: auto;
 }
-.movies__items::-webkit-scrollbar-thumb {
+.movies__items::-webkit-scrollbar-thumb, .user-list__items::-webkit-scrollbar-thumb {
   height: 8px;
   background-color: #d1d1c0;
   border-radius: 4px;
@@ -631,6 +631,7 @@ body {
 .movies__item {
   display: flex;
   flex-direction: column;
+  width: 200px;
   margin: 0 20px 10px 0;
 }
 
@@ -657,6 +658,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.movies-date-vote_margin {
+  margin-bottom: 15px;
 }
 
 .movies__date {
@@ -697,7 +702,7 @@ body {
   font-size: 24px;
   font-weight: 700;
   color: black;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .movie-info__subtitle {
@@ -705,7 +710,7 @@ body {
   font-size: 18px;
   font-weight: 700;
   color: black;
-  margin-bottom: 20px;
+  margin: -10px 0 20px 0;
 }
 
 .movie-info__table {
@@ -935,7 +940,7 @@ a {
   font-size: 18px;
   font-weight: 700;
   color: black;
-  padding: 10px 20px;
+  padding: 8px 18px;
   background-color: #7a316f;
   color: white;
   border-radius: 5px;
@@ -952,4 +957,60 @@ a {
   color: black;
   text-align: center;
   color: #4d4d4d;
+}
+
+.user-info {
+  display: flex;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: #d1d1c0 2px solid;
+}
+
+.user-info__img {
+  width: 240px;
+  height: 240px;
+  margin-right: 20px;
+  border-radius: 12px;
+  box-shadow: 1px 1px 5px gray;
+}
+
+.user-info__title {
+  font-family: Open Sans;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.user-info__name {
+  position: relative;
+}
+.user-info__name .input {
+  min-width: 300px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #d1d1c0;
+}
+.user-info__name .button {
+  position: absolute;
+  bottom: 0;
+}
+
+.user-list {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: #d1d1c0 2px solid;
+}
+.user-list:last-child {
+  border-bottom: 0;
+}
+
+.user-list__title {
+  font-family: Open Sans;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+  padding-left: 7px;
+  margin-bottom: 20px;
+  border-left: #7a316f 3px solid;
 }

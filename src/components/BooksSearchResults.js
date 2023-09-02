@@ -8,13 +8,11 @@ import BooksListItem from './BooksListItem';
 function BooksSearchResults({ searchTerm }) {
   const { data, error, isLoading } = useFetchBooksBySearchTermQuery(searchTerm);
 
-  console.log(data);
-
   let content;
   if (isLoading) {
     content = <ReactIcon src={<ImSpinner className="spinner" />} color="#86a69d" />
   } else if (error) {
-    content = `An error occurred while trying to get books.`;
+    content = <p className="no-results">An error occurred while trying to get books.</p>;
   } else {
     content = data.items?.map((book) => {
       return <BooksListItem key={book.id} id={book.id}

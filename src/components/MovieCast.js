@@ -12,7 +12,7 @@ function MovieCast() {
   if (isLoading) {
     content = <ReactIcon src={<ImSpinner className="spinner" />} color="#86a69d" />;
   } else if (error) {
-    content = 'An error occurred while trying to get movie cast.';
+    content = <p className="no-results">An error occurred while trying to get movie cast.</p>;
   } else {
     content = data.cast.map((actor) => {
       return <Actor key={actor.id} profile={actor.profile_path}

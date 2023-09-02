@@ -38,7 +38,6 @@ const userApi = createApi({
           }
         },
         providesTags(_, __, listType) {
-          console.log(listType);
           return [{ type: 'UserList', id: listType }];
         }
       }),

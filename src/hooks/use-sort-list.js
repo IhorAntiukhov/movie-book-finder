@@ -8,16 +8,15 @@ function useSortList() {
 
     if (sortParams.order === 1) {
       sortedContent.sort((a, b) => {
-        console.log(a, b);
-        const date1 = new Date(a.props.releaseDate).getTime();
-        const date2 = new Date(b.props.releaseDate).getTime();
+        const date1 = new Date(a.props.releaseDate || 0).getTime();
+        const date2 = new Date(b.props.releaseDate || 0).getTime();
 
         return date2 - date1;
       });
     } else if (sortParams.order === 2) {
       sortedContent.sort((a, b) => {
-        const date1 = new Date(a.props.releaseDate).getTime();
-        const date2 = new Date(b.props.releaseDate).getTime();
+        const date1 = new Date(a.props.releaseDate || 0).getTime();
+        const date2 = new Date(b.props.releaseDate || 0).getTime();
 
         return date1 - date2;
       });

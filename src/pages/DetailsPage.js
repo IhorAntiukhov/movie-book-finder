@@ -1,14 +1,13 @@
-import MovieInfo from '../components/MovieInfo';
-import MovieCast from '../components/MovieCast';
 import { useSelector } from 'react-redux';
-import SerieInfo from '../components/SerieInfo';
-import SerieCast from '../components/SerieCast';
-import BookInfo from '../components/BookInfo';
+import MovieInfo from '../components/details/MovieInfo';
+import MovieCast from '../components/details/MovieCast';
+import SerieInfo from '../components/details/SerieInfo';
+import SerieCast from '../components/details/SerieCast';
+import BookInfo from '../components/details/BookInfo';
 
 function DetailsPage() {
   const type = useSelector((state) => state.navigationReducer.openedMovieBookId.type)
 
-  console.log(type);
   let content;
   switch (type) {
     case 'movie':

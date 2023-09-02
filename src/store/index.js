@@ -4,8 +4,7 @@ import {
   navigationReducer, setCurrentPath, setSearchSection, setIsSearchMenuOpen, setOpenedMovieBookId
 } from './slices/navigationSlice';
 import {
-  userProfileReducer, setFullName, addMovieToWatchList, addSerieToWatchList,
-  addBookToReadingList, removeMovieFromWatchList, removeSerieFromWatchList, removeBookFromReadingList
+  userProfileReducer, setFullName
 } from './slices/userProfileSlice';
 import { moviesApi } from './apis/moviesApi';
 import { seriesApi } from './apis/seriesApi';
@@ -33,9 +32,8 @@ const store = configureStore({
 setupListeners(store.dispatch);
 
 export {
-  store, setCurrentPath, setSearchSection, setIsSearchMenuOpen, setOpenedMovieBookId,
-  setFullName, addMovieToWatchList, addSerieToWatchList, addBookToReadingList,
-  removeMovieFromWatchList, removeSerieFromWatchList, removeBookFromReadingList
+  store, setCurrentPath, setSearchSection, setIsSearchMenuOpen,
+  setOpenedMovieBookId, setFullName
 };
 export {
   useFetchPopularMoviesQuery,
@@ -47,6 +45,7 @@ export {
 export {
   useFetchPopularSeriesQuery,
   useFetchSeriesBySearchTermQuery,
+  useFetchSerieDetailsQuery,
   useFetchSerieCastQuery
 } from './apis/seriesApi';
 export {

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPath } from './store'
-import Sidebar from './components/Sidebar';
-import Route from './components/Route';
+import { setCurrentPath, setIsSearchMenuOpen } from './store'
+import Sidebar from './components/navigation/Sidebar';
+import Route from './components/navigation/Route';
 import MoviesPage from './pages/MoviesPage';
 import SeriesPage from './pages/SeriesPage';
 import UserProfilePage from './pages/UserProfilePage';
@@ -44,7 +44,8 @@ function App() {
   return (
     <div className="content">
       <div className={`shade-area ${(isSearchMenuOpen === 1) ? 'shade-area_hide' :
-        (isSearchMenuOpen === 2) ? 'shade-area_show' : ''}`}></div>
+        (isSearchMenuOpen === 2) ? 'shade-area_show' : ''}`}
+        onClick={() => { dispatch(setIsSearchMenuOpen(1)) }}></div>
       <Sidebar />
 
       <div className="main">
